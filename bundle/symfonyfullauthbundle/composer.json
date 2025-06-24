@@ -1,0 +1,25 @@
+{
+    "name": "stt/symfonycommandbundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Command Bundle for projects",
+    "keywords": ["symfony", "command"],
+    "homepage": "https://github.com/e-vural/SymfonyCommandBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "e-vural"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/e-vural/SymfonyCommandBundle/issues"
+    },
+    "require": {
+        "php": ">=8.2",
+        "symfony/http-kernel": "7.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SymfonyFullAuthBundle\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,120 @@
+{% extends "@SymfonyFullAuth/bundle_form_base.html.twig" %}
+{#{% import "@SymfonyFullAuth/auth/macros/auth_macro_buttons.html.twig" as auth_button %}#}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+
+{#{% block content %}#}
+
+
+{#    #}{#    {{ form_errors(form) }} #}
+
+{#    {% for label, messages in app.flashes() %}#}
+{#        {% for message in messages %}#}
+{#            <div class="alert alert-{{ label }}">#}
+{#                {{ message }}#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    {% endfor %}#}
+{#    #}{#    {{- form_errors(form) -}} #}
+
+{#    {{ form_start(form) }}#}
+
+{#    {{- form_widget(form) -}}#}
+{#    #}{#    <div class="mt-5"> #}
+{#    <button type="submit" class="btn btn-block btn-theme">Login</button>#}
+
+
+{#    #}{#        <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="{{ path('register_form') }}" class="text-primary ml-1">Create Account</a></p> #}
+
+{#    #}{#    </div> #}
+
+{#    <input type="hidden" name="redirect_url" value="{{ redirect_url|default }}">#}
+{#    {{ form_end(form) }}#}
+
+
+{#    #}{#    <form action="http://localhost:4200/chat" method="post" target="_blank"> #}
+
+{#    #}{#        <input type="hidden" name="test" value="test_jwt"> #}
+{#    #}{#        <button>Submit</button> #}
+{#    #}{#    </form> #}
+
+{#{% endblock content %}#}
+
+{#{% block footer %}#}
+
+{#    {{ auth_button.forgot_password() }}#}
+{#    {{ auth_button.create_account }}#}
+
+
+
+
+
+{#{% endblock %}#}
+
+
+    {% block back_to_login_block %}{% endblock %}
+
+    {% block content %}
+
+
+        {#        <form action="{{ path('view_user_change_password_form') }}" method="POST"  target="_blank">#}
+
+{#            <input type="hidden" name="authorization" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3Mzc3MjMzOTAsImV4cCI6MTczODcyMzM5MCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9TVEFGRiJdLCJ1c2VybmFtZSI6Im9yaGFuLnN0YWZmQGtvZHBpdC5jb20ifQ.fxQKn2Pr2dFx1DDsgCcDNWDrHgXi06FMhJjVKt3jP9cvCNJNSTo-zEFJigATJHD4ssPX6sNEvZd8YjS5mLQbsJ-feDH0bhlhTMX2DXmSWecfWTnZRYQ_a1gVc2ay4e7p3QutkAYLpGFacdspBo0D_4hHz8qNWojuc3vuaDbxGb6I6DhGf-NQjj3Smn-1fAZBTiqHn6G0hOdkxS97R8fktUzgT0fC3hn3H4UWlTQkHOVzaTknhjAH0RH7vSlMXPUx2zqbL25JWjOdnlp5CqVhfJUSZzXTNqQFcrS1uIEWxyKotROyrMTjvZd-pF3KNdyXLsTiI01SbmBeNSvc8lTd4w">#}
+
+{#            <button> Change Password </button>#}
+{#        </form>#}
+
+
+        {% for label, messages in app.flashes() %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
+        {{ form_start(form) }}
+        <input type="hidden" name="redirect_url" value="{{ redirect_url|default }}">
+
+        <div class="form-group">
+            {#                {{- form_widget(form) -}}#}
+
+            {{ form_label(form.email) }}
+            {#        <label for="email">E-Mail</label>#}
+            {{ form_widget(form.email) }}
+
+            {#        <input type="email" id="email" name="email" placeholder="test@medicus.com" required>#}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.password) }}
+            {#        <label for="email">E-Mail</label>#}
+
+            {#        <label for="password">Password</label>#}
+            <div class="password-container">
+                {{ form_widget(form.password) }}
+                {#            <input type="password" id="password" name="password" placeholder="••••••••" required>#}
+                <span class="toggle-password" onclick="togglePassword(this)">
+                        <svg id="hide-password"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="password-eye-toggle icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                        <svg id="show-password" style="display: none";  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="password-eye-toggle icon icon-tabler icons-tabler-outline icon-tabler-eye-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" /><path d="M3 3l18 18" /></svg>
+                    </span>
+            </div>
+            <div class="forgot-password">
+                <a href="{{ path('app_forgot_password_request') }}">Forgot password</a>
+            </div>
+        </div>
+        <button type="submit" class="action-button">Login</button>
+        {#    <div class="create-account">#}
+        {#        Don't have an account? <a href="{{ path('register_form') }}">Create your account</a>#}
+        {#    </div>#}
+        {{ form_end(form) }}
+    {% endblock %}
+
+{% block footer_js %}
+
+{% endblock %}
+
+

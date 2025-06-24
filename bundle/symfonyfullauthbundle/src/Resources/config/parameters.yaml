@@ -1,0 +1,3 @@
+parameters:
+  user_class: App\Entity\User
+  profile_class: App\Entity\Profile

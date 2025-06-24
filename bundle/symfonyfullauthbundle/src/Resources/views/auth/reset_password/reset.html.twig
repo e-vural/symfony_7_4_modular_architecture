@@ -1,0 +1,28 @@
+
+{% extends '@SymfonyFullAuth/bundle_form_base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+
+{% block content %}
+
+    {{ form_start(resetForm) }}
+
+
+        {{ form_row(resetForm.newPassword.first) }}
+
+
+    <div id="password-strength-info-div" class="mb-3">
+
+    </div>
+
+    {{ form_row(resetForm.newPassword.second) }}
+
+
+    <button class="btn btn-theme mt-3">Reset password</button>
+    {{ form_end(resetForm) }}
+{% endblock %}
+{% block footer %}
+    <p class="text-muted text-center mt-3 mb-0">Do you have an account? <a href="{{ path('view_auth_login_form') }}"
+                                                                           class="text-primary ml-1">login</a></p>
+{% endblock %}

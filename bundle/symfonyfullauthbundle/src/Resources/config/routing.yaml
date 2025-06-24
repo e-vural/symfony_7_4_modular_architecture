@@ -1,0 +1,65 @@
+controller_full_auth_bundle_v1:
+    resource: '../../Controller/Api'
+    type: attribute
+    prefix: "/{_locale}/api"
+
+
+
+controller_full_auth_bundle_view_auth:
+    resource: '../../Controller/View/Auth'
+    type: attribute
+    prefix: "/{_locale}/views/auth"
+
+
+
+controller_full_auth_bundle_view_user:
+    resource: '../../Controller/View/User'
+    type: attribute
+    prefix: "/{_locale}/views/user"
+
+
+# TODO Burada herhangi bir locale eklemesi yapılmayacak çünkü bunlar bizim kendi içimizde oluşturduğumuz URL'ler değil. Zaten kabul etmedi
+api_login_check:
+    path: api/login_check
+
+
+#api_token_invalidate:
+#  path: /api/token/invalidate
+
+# TODO Burada herhangi bir locale eklemesi yapılmayacak çünkü bunlar bizim kendi içimizde oluşturduğumuz URL'ler değil. Zaten kabul etmedi
+api_refresh_token:
+    path: api/token/refresh
+
+
+app.swagger_ui:
+    path: /swagger/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+#app.swagger_redocly:
+#    path: /%locale%/rest-api/redocly
+#    methods: GET
+#    defaults: { _controller: nelmio_api_doc.controller.redocly }
+#
+## config/routes.yaml
+#app.swagger.json:
+#    path: /api/doc.json
+#    methods: GET
+#    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+#  requirements:
+#    version: '%versions%'
+#  defaults:
+#    _locale: '%locale%'
+#    schemes: [ https ]
+
+
+#controller_rest_api_bundle_v2:
+#  resource: '../../Versions/V2/Controller'
+#  type: annotation
+#  prefix: "/rest-api/1.1"
+#  requirements:
+##    _locale: '%app_locales%'
+#  defaults:
+##    _locale: '%locale%'
+#    schemes: [ https ]

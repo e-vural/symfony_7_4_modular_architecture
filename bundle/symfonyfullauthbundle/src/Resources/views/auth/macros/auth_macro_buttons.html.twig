@@ -1,0 +1,18 @@
+{% macro login_button() %}
+
+    <a href="{{ path('view_auth_login_form') }}" class="forgot-link float-right text-primary">Login</a>
+
+
+{% endmacro %}
+
+{% macro create_account() %}
+
+    <a href="{{ path('register_form') }}" class="forgot-link float-right text-primary">Create Account</a>
+
+{% endmacro %}
+
+{% macro forgot_password() %}
+
+    <a href="{{ path('app_forgot_password_request') }}" class="forgot-link float-right text-primary">Forgot password?</a>
+
+{% endmacro %}

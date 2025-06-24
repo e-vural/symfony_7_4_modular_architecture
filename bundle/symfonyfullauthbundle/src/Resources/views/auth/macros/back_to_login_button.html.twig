@@ -1,0 +1,28 @@
+{% macro back_to_login_button() %}
+{#    <a href="{{ path('view_auth_login_form') }}" class="forgot-link float-right text-primary">Back to Login</a>#}
+    <style>
+        .back-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            color: #7B68EE;
+            background-color: #FFF;
+            border: 1px solid #7B68EE;
+            border-radius: 50%;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-right: auto;
+            margin-bottom: 2rem;
+        }
+        .back-button:hover {
+            background-color: #7B68EE;
+            border: 1px solid #7B68EE;
+            color: #FFF;
+        }
+    </style>
+    <a href="{{ path('view_auth_login_form') }}" class="back-button">&#8592;</a>
+{% endmacro %}
