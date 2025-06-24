@@ -17,3 +17,10 @@ phpstan.neon
 /phpunit.xml
 /.phpunit.cache/
 ###< phpunit/phpunit ###
+
+.idea
+.vscode
+.DS_Store
+**.DS_Store
+__MACOSX
+ignored
