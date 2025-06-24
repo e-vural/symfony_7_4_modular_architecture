@@ -7,7 +7,7 @@ services:
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
+      DATABASE_URL: mysql://${MYSQL_USER:-kno_user}:${MYSQL_PASSWORD:-kno123}@mariadb:3306/${MYSQL_DATABASE:-kno_v2}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
       MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}/.well-known/mercure}
@@ -32,12 +32,60 @@ services:
         published: ${HTTP3_PORT:-443}
         protocol: udp
 
-# Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###
+    # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
+    ###> symfony/mercure-bundle ###
+    ###< symfony/mercure-bundle ###
+
+    ###> doctrine/doctrine-bundle ###
+
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-kno_v2}
+      MYSQL_USER: ${MYSQL_USER:-kno_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-kno123}
+    volumes:
+      - ./database/mysql_host:/var/lib/mysql:rw
+    #      - database_data:/var/lib/mysql:rw
+    #        networks:
+    #            - medicus
+    ports:
+      - "3306"
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: on-failure
+    depends_on:
+      - mariadb
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: root
+    #        networks:
+    #            - medicus
+    ports:
+      - "8090:80"
+
 
 volumes:
   caddy_data:
   caddy_config:
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###
+  ###> symfony/mercure-bundle ###
+  ###< symfony/mercure-bundle ###
+
+networks:
+  #    medicus_network:
+  #        driver: bridge
+  default:
+    name: ${DOCKER_NETWORK:-"kno_network"}
+  ###> doctrine/doctrine-bundle ###
+#  database_data:
+###< doctrine/doctrine-bundle ###
