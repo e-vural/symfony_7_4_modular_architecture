@@ -24,3 +24,5 @@ phpstan.neon
 **.DS_Store
 __MACOSX
 ignored
+database
+.env
