@@ -28,6 +28,11 @@ Add this line in the routes.yaml
     
     symfony_full_auth_bundle:
         resource: "@SymfonyFullAuthBundle/Resources/config/routing.yaml"
+        prefix: "/{_locale}/api"
+        defaults:
+            _locale: "tr"
+        requirements:
+            _locale: "tr|en"
 
 
 ###  - doctrine.yaml Revision

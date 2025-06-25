@@ -3,21 +3,13 @@
 namespace SymfonyFullAuthBundle\Service\Login;
 
 use AllowDynamicProperties;
+use App\Entity\Auth\User\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use SymfonyFullAuthBundle\Controller\View\Auth\LoginFailedException;
-use SymfonyFullAuthBundle\Entity\User\User;
+use SymfonyFullAuthBundle\Exception\LoginFailedException;
 
 #[AllowDynamicProperties]
 class JsonLoginService

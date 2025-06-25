@@ -3,7 +3,7 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
+
 
 services:
     # default configuration for services in *this* file
@@ -15,7 +15,22 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+#        exclude:
+#            - '../src/*/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    ######### region SECURITY SERVICES ###############
+
+    api_authenticator:
+        class: App\Security\Authentication\CustomAuthenticator
+        parent: lexik_jwt_authentication.security.jwt_authenticator
+
+#    api.event.jwt_created_listener:
+#        class: App\Security\Authentication\JWTCreatedListener
+#        arguments: [ '@request_stack' ]
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
+    ######### endregion SECURITY SERVICES ###############

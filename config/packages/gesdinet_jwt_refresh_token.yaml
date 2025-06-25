@@ -1,5 +1,5 @@
 gesdinet_jwt_refresh_token:
-    refresh_token_class: SymfonyFullAuthBundle\Entity\RefreshToken\RefreshToken
+    refresh_token_class: App\Entity\Auth\RefreshToken\RefreshToken
     ttl: 2592000 # 20 sn & Default : 1 ay -> 2592000 sn
     ttl_update: true
     firewall: api

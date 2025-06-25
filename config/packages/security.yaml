@@ -6,7 +6,7 @@ security:
     providers:
         user_entity_provider:
             entity:
-                class: SymfonyFullAuthBundle\Entity\User\User
+                class: App\Entity\Auth\User\User
                 property: email
     firewalls:
         login:
@@ -26,9 +26,9 @@ security:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            user_checker: SymfonyFullAuthBundle\Security\FullAuthBundleUserChecker
+            user_checker: authentication_user_checker
             jwt:
-                authenticator: custom_api_authenticator
+                authenticator: api_authenticator
             refresh_jwt:
                 check_path: /api/token/refresh
         dev:
@@ -47,6 +47,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: /api/auth/login, roles: PUBLIC_ACCESS }
+        - { path: /api/auth/register, roles: PUBLIC_ACCESS }
+        - { path: /api/auth/reset-password, roles: PUBLIC_ACCESS }
+        - { path: /api,       roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

@@ -3,7 +3,6 @@
 namespace SymfonyFullAuthBundle\FormExtension;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\MappingException;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +11,12 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use SymfonyFullAuthBundle\Form\FormException;
-use function PHPUnit\Framework\isEmpty;
 
 class FormTypeExtension extends AbstractTypeExtension
 {
     public function __construct(private readonly EntityManagerInterface $entityManager)
     {
+
     }
 
 
@@ -26,15 +25,19 @@ class FormTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
+
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm();
             $data = $event->getData();
 
-
             $allow_exception = $form->getConfig()->getOption("allow_exception");
             $formErrors = $form->getErrors(true);
-//            dump($form->getName(),$formErrors->count());
+
+//            dump($allow_exception,$form->getErrors(true));
             if($formErrors->count()){
+
                 $errors = [];
                 $errorMessage  = null;
                 /** @var FormError $formError */
@@ -51,6 +54,8 @@ class FormTypeExtension extends AbstractTypeExtension
                 }
             }else{
                 $dataClass = $form->getConfig()->getDataClass();
+
+
                 if(!empty($dataClass) && is_object($data)){
                     try {
                         $this->entityManager->getClassMetadata($dataClass);

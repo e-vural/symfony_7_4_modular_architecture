@@ -14,20 +14,20 @@ services:
     #      $refreshTokenManager: '@gesdinet.jwtrefreshtoken.refresh_token_manager'
     #      $refreshTokenGenerator: '@gesdinet.jwtrefreshtoken.refresh_token_generator'
 
-    custom_api_authenticator:
-        class: SymfonyFullAuthBundle\Security\FullAuthApiBundleAuthenticator
-        parent: lexik_jwt_authentication.security.jwt_authenticator
-        #    arguments:
-        #      $jwsProvider: '@lexik_jwt_authentication.jws_provider.lcobucci'
-        #    calls:
-        #      - setJwsProvider: ["lexik_jwt_authentication.jws_provider.lcobucci"]
-        # arguments: ["lexik_jwt_authentication.jwt_manager","event_dispatcher","lexik_jwt_authentication.extractor.chain_extractor","","translator"]
-
-    full_auth_bundle.event.jwt_created_listener:
-        class: SymfonyFullAuthBundle\Security\JWTCreatedListener
-        arguments: [ '@request_stack' ]
-        tags:
-            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+#    custom_api_authenticator:
+#        class: SymfonyFullAuthBundle\Security\FullAuthApiBundleAuthenticator
+#        parent: lexik_jwt_authentication.security.jwt_authenticator
+#        #    arguments:
+#        #      $jwsProvider: '@lexik_jwt_authentication.jws_provider.lcobucci'
+#        #    calls:
+#        #      - setJwsProvider: ["lexik_jwt_authentication.jws_provider.lcobucci"]
+#        # arguments: ["lexik_jwt_authentication.jwt_manager","event_dispatcher","lexik_jwt_authentication.extractor.chain_extractor","","translator"]
+#
+#    full_auth_bundle.event.jwt_created_listener:
+#        class: SymfonyFullAuthBundle\Security\JWTCreatedListener
+#        arguments: [ '@request_stack' ]
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
 
 
 

@@ -2,14 +2,10 @@
 
 namespace SymfonyFullAuthBundle\Form\Profile;
 
-use Symfony\Component\Form\Event\PostSubmitEvent;
-use Symfony\Component\Form\Event\PreSubmitEvent;
+use App\Entity\Profile\Profile;
+use App\Form\AbstractForm;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use SymfonyFullAuthBundle\Entity\Profile\Profile;
-use SymfonyFullAuthBundle\Form\AbstractForm;
-use SymfonyFullAuthBundle\Form\User\UserForm;
 
 class ProfileForm extends AbstractForm
 {

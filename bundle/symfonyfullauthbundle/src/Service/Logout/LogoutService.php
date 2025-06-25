@@ -3,22 +3,12 @@
 namespace SymfonyFullAuthBundle\Service\Logout;
 
 use AllowDynamicProperties;
+use App\Entity\Auth\User\User;
 use App\Entity\MobileDevice\MobileDevice;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use SymfonyFullAuthBundle\Controller\View\Auth\LoginFailedException;
-use SymfonyFullAuthBundle\Entity\User\User;
 
 #[AllowDynamicProperties] class LogoutService
 {
