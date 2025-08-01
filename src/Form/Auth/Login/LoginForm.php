@@ -2,18 +2,19 @@
 
 namespace App\Form\Auth\Login;
 
-use App\Form\AbstractForm;
-use App\Form\Auth\User\FieldType\UserIdentifier;
+use App\Form\MyAbstractForm;
+use App\Infrastructure\FormType\User\UserIdentifierFormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LoginForm extends AbstractForm
+class LoginForm extends MyAbstractForm
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
-        $builder = UserIdentifier::addToBuilder($builder);
+//        $builder = UserIdentifier::addToBuilder($builder);
+        $builder->add(UserIdentifierFormType::CHILD_NAME,UserIdentifierFormType::class);
         $builder
             ->add('password', PasswordType::class, [
                 'required' => true,

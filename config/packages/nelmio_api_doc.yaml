@@ -4,12 +4,14 @@ nelmio_api_doc:
             title: KNO API
             description: This is an awesome app!
             version: 1.0.0
+        components:
             securitySchemes:
-                BearerAuth:
+                Bearer:
                     type: http
-                    scheme: bearer # Burada "bearer" doğru olmalı
+                    scheme: bearer
+                    bearerFormat: JWT
         security:
-            - BearerAuth: [] # Tüm endpointlerde varsayılan olarak uygulanacak
+            - Bearer: [ ] # Tüm endpointlerde varsayılan olarak uygulanacak
     areas: # to filter documented areas
         path_patterns:
             - ^/{_locale}/api(?!/doc$)|views # Accepts routes under /api except /api/doc

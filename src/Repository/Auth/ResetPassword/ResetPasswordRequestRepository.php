@@ -3,7 +3,7 @@
 namespace App\Repository\Auth\ResetPassword;
 
 use App\Entity\Auth\ResetPassword\ResetPasswordRequest;
-use App\Entity\Auth\User\User;
+use App\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;

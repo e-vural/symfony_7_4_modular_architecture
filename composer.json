@@ -63,8 +63,8 @@
     },
     "autoload": {
         "psr-4": {
-            "SymfonyFullAuthBundle\\": "bundle/symfonyfullauthbundle/src",
-            "App\\": "src/"
+            "App\\": "src/",
+            "Symfony\\Bundle\\MakerBundle\\": ".maker"
         }
     },
     "autoload-dev": {

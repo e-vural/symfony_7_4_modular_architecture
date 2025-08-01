@@ -3,9 +3,9 @@
 namespace App\Entity\Profile;
 
 
-use App\Entity\Auth\User\User;
-use App\Infrastructure\Traits\Entity\Date\DatetimeTrait;
-use App\Infrastructure\Traits\Entity\PrimaryKey\PrimaryKeyTrait;
+use App\Entity\_Traits\Date\DatetimeTrait;
+use App\Entity\_Traits\PrimaryKey\PrimaryKeyTrait;
+use App\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 

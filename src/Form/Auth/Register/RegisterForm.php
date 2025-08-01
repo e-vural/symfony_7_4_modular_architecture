@@ -2,25 +2,27 @@
 
 namespace App\Form\Auth\Register;
 
-use App\Form\AbstractForm;
-use App\Form\Auth\User\UserForm;
-use Symfony\Component\Form\Event\PostSubmitEvent;
+use App\Form\MyAbstractForm;
+use App\Form\User\UserForm;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use SymfonyFullAuthBundle\Form\Profile\ProfileForm;
 
-class RegisterForm extends AbstractForm
+class RegisterForm extends MyAbstractForm
 {
     public static function addToBuilder(FormBuilderInterface $builder): FormBuilderInterface
     {
-        // TODO addToBuilder ile aşağıdaki buildForm niye var. Bu zaten birleştirilmiş bir form yapısı. Bu dışarıda ek olarak kullanılır mı ? Ayrıca UI tarafını da karşılıyor burası. Değiştirilmezse iyi olur.
-        $builder
-//            ->add('profile', ProfileForm::class)
-            ->add('user', UserForm::class)
-            ->addEventListener(FormEvents::POST_SUBMIT, function (PostSubmitEvent $event) {
 
-            })
+//        $builder = UserIdentifier::addToBuilder($builder);
+//        UserForm::addToBuilder($builder);
+//        // TODO addToBuilder ile aşağıdaki buildForm niye var. Bu zaten birleştirilmiş bir form yapısı. Bu dışarıda ek olarak kullanılır mı ? Ayrıca UI tarafını da karşılıyor burası. Değiştirilmezse iyi olur.
+        $builder
+//////            ->add('profile', ProfileForm::class)
+            ->add('user', UserForm::class)
+//            ->add('identifier', UserIdentifier::class)
+//            ->add('password', UserPassword::class)
+////            ->addEventListener(FormEvents::POST_SUBMIT, function (PostSubmitEvent $event) {
+////
+////            })
         ;
 
         return $builder;
@@ -30,8 +32,8 @@ class RegisterForm extends AbstractForm
     {
         self::addToBuilder($builder);
 
-        $builder
-            ->add('user', UserForm::class);
+//        $builder
+//            ->add('user', UserForm::class);
     }
 
 
@@ -43,6 +45,7 @@ class RegisterForm extends AbstractForm
             "attr" => ["autocomplete" => "off", "novalidate" => "novalidate"],
         ]);
     }
+
 }
 
 

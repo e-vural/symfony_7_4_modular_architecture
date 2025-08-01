@@ -2,20 +2,20 @@
 
 namespace App\Form\Auth\ResetPassword;
 
-use App\Form\Auth\User\FieldType\UserPassword;
-use Symfony\Component\Form\AbstractType;
+use App\Form\MyAbstractForm;
+use App\Infrastructure\FormType\User\UserPasswordFormType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResetPasswordForm extends AbstractType
+class ResetPasswordForm extends MyAbstractForm
 {
 
     public static function addToBuilder(FormBuilderInterface $builder)
     {
         $builder
             ->add('newPassword', RepeatedType::class, [
-                'type' => UserPassword::class,
+                'type' => UserPasswordFormType::class,
                 'options' => [
                     'property_path' => null,
                 ],
