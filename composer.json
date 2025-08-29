@@ -64,7 +64,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "Symfony\\Bundle\\MakerBundle\\": ".maker/src"
+            "Symfony\\Bundle\\MakerBundle\\": ".maker-bundle-overwrite/src"
         }
     },
     "autoload-dev": {
