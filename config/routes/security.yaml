@@ -2,14 +2,14 @@ _security_logout:
     resource: security.route_loader.logout
     type: service
 
-# TODO Burada herhangi bir locale eklemesi yapılmayacak çünkü bunlar bizim kendi içimizde oluşturduğumuz URL'ler değil. Zaten kabul etmedi
+
 #api_login_check:
 #    path: api/login_check
-#
-#
+
+
 ##api_token_invalidate:
 ##  path: /api/token/invalidate
-#
-## TODO Burada herhangi bir locale eklemesi yapılmayacak çünkü bunlar bizim kendi içimizde oluşturduğumuz URL'ler değil. Zaten kabul etmedi
+
+
 #api_refresh_token:
 #    path: api/token/refresh

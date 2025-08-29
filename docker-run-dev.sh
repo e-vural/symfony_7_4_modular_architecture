@@ -6,6 +6,13 @@ MYSQL_PASSWORD=kno123 \
 MYSQL_DATABASE=kno_v2 \
 MYSQL_VERSION=10 \
 MYSQL_CHARSET=utf8 \
+APP_SECRET=deneme123 \
+CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
 docker compose up -d --build
 
+
 echo 'run click https://kno.localhost'
+#docker compose up -d --build
+#docker compose -f compose.yaml -f compose.prod.yaml up --wait
+
+

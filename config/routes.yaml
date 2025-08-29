@@ -1,7 +1,7 @@
-controllers:
+module_controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Modules
+        namespace: App\Modules
     type: attribute
     prefix: "/{_locale}/api"
     defaults:
@@ -9,14 +9,29 @@ controllers:
     requirements:
         _locale: "tr|en"
 
+sandbox_controllers:
+    resource:
+        path: ../src/Sandbox
+        namespace: App\Sandbox
+    type: attribute
+    prefix: "/{_locale}/api/sandbox"
+    defaults:
+        _locale: "tr"
+    requirements:
+        _locale: "tr|en"
 
 
-#symfony_full_auth_bundle:
-#    resource: "@SymfonyFullAuthBundle/Resources/config/routing.yaml"
+
+
+
+
+
+#base_controllers:
+#    resource: "routes/modules.yaml"
 #    prefix: "/{_locale}/api"
 #    defaults:
 #        _locale: "tr"
 #    requirements:
 #        _locale: "tr|en"
-
-
+#
+#

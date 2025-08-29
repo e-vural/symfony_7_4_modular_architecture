@@ -1,4 +1,4 @@
-auth:
+user:
     reset_password: "şifremi sıfırla"
     login: "giriş yap"
     do_you_have_an_account: "Zaten bir hesabınız var mı?"

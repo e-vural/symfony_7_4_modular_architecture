@@ -6,7 +6,7 @@ security:
     providers:
         user_entity_provider:
             entity:
-                class: App\Entity\Auth\User\User
+                class: App\Modules\User\Entity\User
                 property: email
     firewalls:
         login:
@@ -48,9 +48,10 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: /test, roles: PUBLIC_ACCESS }
-        - { path: /api/auth/login, roles: PUBLIC_ACCESS }
-        - { path: /api/auth/register, roles: PUBLIC_ACCESS }
-        - { path: /api/auth/reset-password, roles: PUBLIC_ACCESS }
+        - { path: /login, roles: PUBLIC_ACCESS }
+        - { path: /register, roles: PUBLIC_ACCESS }
+        - { path: /reset-password, roles: PUBLIC_ACCESS }
+        - { path: /no-secure, roles: PUBLIC_ACCESS }
         - { path: /api,       roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

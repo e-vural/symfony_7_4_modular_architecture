@@ -1,0 +1,17 @@
+SERVER_NAME=kno.localhost \
+HTTP_PORT=80 \
+HTTPS_PORT=443 \
+MYSQL_USER=kno_db_user \
+MYSQL_PASSWORD=kno123 \
+MYSQL_DATABASE=kno_v2 \
+MYSQL_VERSION=10 \
+MYSQL_CHARSET=utf8 \
+APP_SECRET=deneme123 \
+CADDY_MERCURE_JWT_SECRET=ChangeThisMercureHubJWTSecretKey \
+docker compose -f compose.yaml -f compose.prod.yaml up --wait
+
+
+echo 'run click https://kno.localhost'
+#docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
+
+
