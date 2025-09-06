@@ -18,7 +18,7 @@ final class ExceptionListener
 
 
         if($exception instanceof FormException){
-            $response = new JsonResponse(["message" => $exception->getMessage(),"errors" => $exception->getErrors(false),"fromGlobalException" => true],400);
+            $response = new JsonResponse(["message" => $exception->getMessage(),"errors" => $exception->getErrors(false),"fromGlobalException" => true],$exception->getCode());
             $event->setResponse($response);
         }
     }

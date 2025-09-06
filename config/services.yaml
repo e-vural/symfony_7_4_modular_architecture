@@ -38,3 +38,12 @@ services:
 #            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
 
     ######### endregion SECURITY SERVICES ###############
+    App\Infrastructure\ApiDoc\AutoUnauthorizedResponseDescriber:
+        tags:
+            - { name: nelmio_api_doc.route_argument_describer }
+    ######### endregion SECURITY SERVICES ###############
+
+
+    App\Infrastructure\ApiDoc\AutoFormErrorRequestBodyDescriber:
+        tags:
+            - { name: nelmio_api_doc.route_describer }

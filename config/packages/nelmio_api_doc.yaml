@@ -1,21 +1,22 @@
 nelmio_api_doc:
+    use_validation_groups: true
     html_config:
         swagger_ui_config:
             tagsSorter: "alpha"
-#            operationsSorter: "method"
-#            operationsSorter: "alpha"
-#            tagsSorter: >
-#                function(a, b) {
-#                  // Tag metadata'sına erişim
-#                  var tags = window.ui.getSystem().specSelectors.specJson().get("tags").toJS();
-#                  var getPriority = function(tagName) {
-#                    var t = tags.find(t => t.name === tagName);
-#                    return t && t['x-priority'] ? t['x-priority'] : 0;
-#                  };
-#                  // Önce priority'ye göre, sonra alfabetik sırala
-#                  var diff = getPriority(b) - getPriority(a);
-#                  return diff !== 0 ? diff : a.localeCompare(b);
-#                }
+    #            operationsSorter: "method"
+    #            operationsSorter: "alpha"
+    #            tagsSorter: >
+    #                function(a, b) {
+    #                  // Tag metadata'sına erişim
+    #                  var tags = window.ui.getSystem().specSelectors.specJson().get("tags").toJS();
+    #                  var getPriority = function(tagName) {
+    #                    var t = tags.find(t => t.name === tagName);
+    #                    return t && t['x-priority'] ? t['x-priority'] : 0;
+    #                  };
+    #                  // Önce priority'ye göre, sonra alfabetik sırala
+    #                  var diff = getPriority(b) - getPriority(a);
+    #                  return diff !== 0 ? diff : a.localeCompare(b);
+    #                }
     documentation:
         info:
             title: KNO API
@@ -27,8 +28,28 @@ nelmio_api_doc:
                     type: http
                     scheme: bearer
                     bearerFormat: JWT
+            responses:
+                UnauthorizedJWT:
+                    description: Kimlik doğrulama hatası
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                            examples:
+                                jwt_expired:
+                                    summary: JWT token has expired
+                                    value:
+                                        message: "JWT token has expired"
+                                jwt_invalid:
+                                    summary: Token geçersiz
+                                    value:
+                                        message: "Invalid JWT token"
+
         security:
-            - Bearer: [ ] # Tüm endpointlerde varsayılan olarak uygulanacak
+            -   Bearer: [ ] # Tüm endpointlerde varsayılan olarak uygulanacak
     areas: # to filter documented areas
         path_patterns:
             - ^/{_locale}/api(?!/doc$)|views # Accepts routes under /api except /api/doc

@@ -97,7 +97,6 @@ class Generator
     final public function generateClassFromClassData(ClassData $classData, string $templateName, array $variables = [], bool $isController = false): string
     {
         $classData = $this->templateComponentGenerator->configureClass($classData);
-        dump($classData);
 
         $targetPath = $this->fileManager->getRelativePathForFutureClass($classData->getFullClassName());
 
@@ -110,6 +109,7 @@ class Generator
         if ($isController) {
             $globalTemplateVars['generator'] = $this->templateComponentGenerator;
         }
+//        dd($classData);
 
         $this->addOperation($targetPath, $templateName, array_merge($variables, $globalTemplateVars));
 
@@ -186,7 +186,7 @@ class Generator
     public function createClassNameDetails(string $name, string $namespacePrefix, string $suffix = '', string $validationErrorMessage = ''): ClassNameDetails
     {
 
-        dump("my generator");;
+        dd("createClassNameDetails");
 //        $fullNamespacePrefix = $this->namespacePrefix.'\\'.$namespacePrefix;//ORiginal
         dd($name,$namespacePrefix,$this->namespacePrefix);
         $fullNamespacePrefix = $name;//TODO Modül bazlı içni burayı geliştir. henüz tam olmadı
@@ -256,6 +256,10 @@ class Generator
 
     public function generateController(string $controllerClassName, string $controllerTemplatePath, array $parameters = []): string
     {
+
+
+        dd("generateController");
+
         return $this->generateClass(
             $controllerClassName,
             $controllerTemplatePath,
@@ -273,6 +277,9 @@ class Generator
      */
     public function generateTemplate(string $targetPath, string $templateName, array $variables = [])
     {
+
+        dd("generateTemplate");
+
         $this->generateFile(
             $this->fileManager->getPathForTemplate($targetPath),
             $templateName,
@@ -307,13 +314,11 @@ class Generator
         $variables['relative_path'] = $this->fileManager->relativizePath($targetPath);
 
         $templatePath = __DIR__ . "/../templates/" .$templateName;
-        dump($templatePath,file_exists($templatePath));
 
         if (!file_exists($templatePath)) {
             $templatePath = self::ORIGINAL_TEMP_PATH."/".$templateName;
         }
 
-//        dd($templatePath);
 
         if (!file_exists($templatePath)) {
             $templatePath = \sprintf('%s/templates/%s', \dirname(__DIR__), $templateName);
@@ -331,6 +336,7 @@ class Generator
             'template' => $templatePath,
             'variables' => $variables,
         ];
+//        dd(11);
     }
 
     /**

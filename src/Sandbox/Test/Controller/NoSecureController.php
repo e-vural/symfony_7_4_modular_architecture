@@ -14,11 +14,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/no-secure')]
 #[Security(name: null)]
-#[OA\Tag(name: "Test",x: ['priority' => 999])]
+#[OA\Tag(name: "Test")]
 class NoSecureController extends BaseAbstractApiController
 {
 
-    #[Route('',methods: ['GET'])]
+    #[Route('', methods: ['GET'])]
     #[OA\Response(
         response: 200,
         description: "Token Object"

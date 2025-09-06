@@ -48,6 +48,7 @@ class BaseJsonResponse
     private function fromArray(array $data, $message, $extraData = [])
     {
 
+        $data["data"] = $data;
         $data["message"] = $message ?? "";
 
         if (!empty($extraData)) {

@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Form\Register;
 
+use App\Modules\User\Form\Profile\ProfileForm;
 use App\Modules\User\Form\UserForm;
 use App\Shared\Form\BaseAbstractForm;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,6 +14,7 @@ class RegisterForm extends BaseAbstractForm
     {
 
         $builder->add('user', UserForm::class);
+//        $builder->add('profile', ProfileForm::class);
 
 
         return $builder;

@@ -13,6 +13,7 @@ use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 #[
@@ -20,13 +21,6 @@ use Symfony\Component\Routing\Attribute\Route;
         name: "User",
         description: "Kullanıcı işlemleri için API endpoint'leri"
     ),
-    OA\Post(
-        path: "/login",
-        summary: "Kullanıcı Girişi",
-        description: "Kullanıcı kimlik bilgileri ile sisteme giriş yapar ve JWT token döner",
-        tags: ["User"],
-        operationId: "userLogin"
-    )
 ]
 #[Security(name: null)]
 #[UserRoutePrefix()]
@@ -41,11 +35,11 @@ class LoginController extends BaseAbstractApiController
         required: true,
         content: new OA\JsonContent(
             ref: new Model(type: LoginForm::class),
+            required: ["identifier", "password"],
             example: [
                 'identifier' => 'emre.vural@kodpit.com',
                 'password' => 'Password1!'
-            ],
-            required: ["identifier", "password"]
+            ]
         )
     )]
     #[OA\Response(
@@ -55,85 +49,42 @@ class LoginController extends BaseAbstractApiController
             properties: [
                 new OA\Property(
                     property: "token",
-                    type: "string",
                     description: "JWT access token",
+                    type: "string",
                     example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9..."
                 ),
                 new OA\Property(
                     property: "refreshToken",
-                    type: "string",
                     description: "JWT refresh token",
+                    type: "string",
                     example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9..."
                 ),
                 new OA\Property(
                     property: "refreshTokenExpiration",
-                    type: "integer",
                     description: "Token'ın geçerlilik süresi (saniye)",
+                    type: "integer",
                     example: 3600
                 )
             ]
         )
     )]
-    #[OA\Response(
-        response: 400,
-        description: "Hatalı istek - Form validasyon hatası",
-        content: new OA\JsonContent(
-            properties: [
-                new OA\Property(
-                    property: "error",
-                    type: "string",
-                    description: "Hata mesajı",
-                    example: "Something went wrong"
-                ),
-                new OA\Property(
-                    property: "errors",
-                    type: "object",
-                    description: "Form validasyon hataları",
-                    example: [
-                        "identifier" => ["Bu alan zorunludur"],
-                        "password" => ["Bu alan zorunludur"]
-                    ]
-                )
-            ]
-        )
-    )]
-    #[OA\Response(
-        response: 401,
-        description: "Kimlik doğrulama hatası",
-        content: new OA\JsonContent(
-            properties: [
-                new OA\Property(
-                    property: "error",
-                    type: "string",
-                    description: "Kimlik doğrulama hatası mesajı",
-                    example: "Invalid credentials"
-                )
-            ]
-        )
-    )]
-    #[OA\Response(
-        response: 500,
-        description: "Sunucu hatası",
-        content: new OA\JsonContent(
-            properties: [
-                new OA\Property(
-                    property: "error",
-                    type: "string",
-                    description: "Sunucu hatası mesajı",
-                    example: "Internal server error"
-                )
-            ]
-        )
-    )]
+
     public function login(Request $request, JsonLoginService $jsonLoginService): JsonResponse
     {
         $payload = $request->toArray();
 
+////        $reuslts = $validator->validate(LoginForm::class);
+////        dd($reuslts);
         $form = $this->createForm(LoginForm::class);
-
+////       $error = $form->get("password")->getConfig()->getOption('constraints');
+//        foreach ($form->all() as  $key => $item) {
+//            $constraints = $item->getConfig()->getOption("constraints");
+//            dump($constraints);
+//        }
+//       dd($form->all());
         $form->submit($payload);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $tokens = $jsonLoginService->login($form->get(UserIdentifierFormType::CHILD_NAME)->getData(), $form->get("password")->getData());
             return new JsonResponse($tokens);
