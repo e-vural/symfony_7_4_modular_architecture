@@ -20,6 +20,7 @@ class JWTCreatedListener
 
     #[NoReturn] public function onJWTCreated(JWTCreatedEvent $event): void
     {
+
         $payload       = $event->getData();
 
 //        dd($payload);

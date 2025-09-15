@@ -43,7 +43,7 @@ final class MakeController extends AbstractMaker
     private bool $usesTwigTemplate;
     private string $twigTemplatePath;
 
-    const TARGET_DIR = "Domain";
+    const TARGET_DIR = "Modules";
 
     public function __construct(private ?PhpCompatUtil $phpCompatUtil = null)
     {

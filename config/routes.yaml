@@ -9,6 +9,7 @@ module_controllers:
     requirements:
         _locale: "tr|en"
 
+
 sandbox_controllers:
     resource:
         path: ../src/Sandbox

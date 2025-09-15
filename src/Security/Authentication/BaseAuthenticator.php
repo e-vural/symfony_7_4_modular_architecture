@@ -3,6 +3,7 @@
 namespace App\Security\Authentication;
 
 use AllowDynamicProperties;
+use App\Shared\Http\BaseJsonResponse;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\ExpiredTokenException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\InvalidTokenException;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\JWTAuthenticator;
@@ -34,7 +35,8 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 //        dd(1);
         parent::start($request, $authException); //
 
-        return new JsonResponse(["message" => "You need to authorize"], Response::HTTP_UNAUTHORIZED);
+        return $this->unauthorizedResponse("You must send token");
+//        return new JsonResponse(["data" => "You need to authorize"], Response::HTTP_UNAUTHORIZED);
     }
 
 //    public function authenticate(Request $request): Passport
@@ -54,11 +56,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
         // TODO Bu response ortak kullanılacak olan reposne generator classından geçmelidir.
         if ($exception instanceof ExpiredTokenException) {
-            return new JsonResponse(["message" => "JWT Token Expired"], Response::HTTP_UNAUTHORIZED);
+            return $this->unauthorizedResponse("Expired");
         } elseif ($exception instanceof InvalidTokenException) {
-            return new JsonResponse(["message" => "JWT Token Invalid"], Response::HTTP_NOT_ACCEPTABLE);
+            return $this->unauthorizedResponse("Invalid");
         } else {
-            return new JsonResponse(["message" => "JWT Token Problem"], Response::HTTP_FORBIDDEN);
+            return $this->unauthorizedResponse();
         }
     }
 
@@ -67,5 +69,13 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
         $token = new BaseAuthenticationToken($passport->getUser(), $firewallName, $passport->getUser()->getRoles(), $passport->getAttribute('token'));
         return $token;
+    }
+
+    private function unauthorizedResponse($message = '')
+    {
+        {
+            $jsonResponse = new BaseJsonResponse();
+            return $jsonResponse->jsonResponse([], "Token Problem ($message)", [], Response::HTTP_UNAUTHORIZED);
+        }
     }
 }

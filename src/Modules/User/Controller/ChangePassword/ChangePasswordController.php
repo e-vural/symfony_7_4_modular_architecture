@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Attribute\Route;
     OA\Post(tags: ["User"]),
 ]
 #[UserRoutePrefix()]
+
 class ChangePasswordController extends AbstractController
 {
     #[Route('/change-password', name: 'change_password', methods: ["POST"])]
