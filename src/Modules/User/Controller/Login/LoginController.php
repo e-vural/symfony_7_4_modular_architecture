@@ -30,6 +30,13 @@ class LoginController extends BaseAbstractApiController
      * Login Process
      */
     #[Route('/login', name: 'login', methods: ['POST'])]
+//    #[OA\Parameter(
+//        name: "id",
+//        in: "path",
+//        required: true,
+//        description: "Department ID",
+//        schema: new OA\Schema(type: "integer")
+//    )]
     #[OA\RequestBody(
         description: "Kullanıcı giriş bilgileri",
         required: true,
@@ -37,8 +44,8 @@ class LoginController extends BaseAbstractApiController
             ref: new Model(type: LoginForm::class),
             required: ["identifier", "password"],
             example: [
-                'identifier' => 'emre.vural@kodpit.com',
-                'password' => 'Password1!'
+                'identifier' => 'ramazan.akin@kodpit.com',
+                'password' => '123'
             ]
         )
     )]

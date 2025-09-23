@@ -41,14 +41,14 @@ final class EntityClassGenerator
 //        dd("EntityClassGenerator");
     }
 
-    public function generateEntityClass(ClassNameDetails $entityClassDetails, bool $apiResource, bool $withPasswordUpgrade = false, bool $generateRepositoryClass = true, bool $broadcast = false, EntityIdTypeEnum $useUuidIdentifier = EntityIdTypeEnum::INT): string
+    public function generateEntityClass(ClassNameDetails $entityClassDetails, bool $apiResource, bool $withPasswordUpgrade = false, bool $generateRepositoryClass = true, bool $broadcast = false, EntityIdTypeEnum $useUuidIdentifier = EntityIdTypeEnum::INT,$modulesName): string
     {
 
-//        dd("EntityClassGenerator");
+
 
         $repoClassDetails = $this->generator->createClassNameDetails(
             $entityClassDetails->getRelativeName(),
-            'Repository\\',
+            "Modules\\{$modulesName}\\Repository\\",
             'Repository'
         );
 

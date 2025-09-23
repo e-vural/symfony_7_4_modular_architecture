@@ -95,8 +95,10 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
 
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
     {
+
+
         $command
-//            ->addArgument('module', InputArgument::OPTIONAL, \sprintf('Class module of the entity to create or update (e.g. <fg=yellow>%s</>)', Str::asClassName(Str::getRandomTerm())))
+            ->addArgument('module', InputArgument::OPTIONAL, \sprintf('Class module of the entity to create or update (e.g. <fg=yellow>%s</>)', Str::asClassName(Str::getRandomTerm())))
             ->addArgument('name', InputArgument::OPTIONAL, \sprintf('Class name of the entity to create or update (e.g. <fg=yellow>%s</>)', Str::asClassName(Str::getRandomTerm())))
             ->addOption('api-resource', 'a', InputOption::VALUE_NONE, 'Mark this class as an API Platform resource (expose a CRUD API for it)')
             ->addOption('broadcast', 'b', InputOption::VALUE_NONE, 'Add the ability to broadcast entity updates using Symfony UX Turbo?')
@@ -107,12 +109,13 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
 
         $this->addWithUuidOption($command);
 
-//        $inputConfig->setArgumentAsNonInteractive('module');
+        $inputConfig->setArgumentAsNonInteractive('module');
         $inputConfig->setArgumentAsNonInteractive('name');
     }
 
     public function interact(InputInterface $input, ConsoleStyle $io, Command $command): void
     {
+
 
         if (($entityClassName = $input->getArgument('name')) && empty($this->verifyEntityName($entityClassName))) {
             return;
@@ -132,15 +135,14 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
 
         $this->checkIsUsingUid($input);
 
-//        $argument = $command->getDefinition()->getArgument('module');
-//        $question = $this->createEntityModuleQuestion($argument->getDescription());
-//        $moduleName ??= $io->askQuestion($question);
+        $argument = $command->getDefinition()->getArgument('module');
+        $question = $this->createEntityModuleQuestion($argument->getDescription());
+        $moduleName ??= $io->askQuestion($question);
 
         $argument = $command->getDefinition()->getArgument('name');
         $question = $this->createEntityClassQuestion($argument->getDescription());
         $entityClassName ??= $io->askQuestion($question);
 
-//
 
 
         while ($dangerous = $this->verifyEntityName($entityClassName)) {
@@ -152,6 +154,8 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
         }
 
         $input->setArgument('name', $entityClassName);
+        //TODO burada atama yapılmadan önce module kontrol edilebilir.
+        $input->setArgument('module', $moduleName);
 
         if (
             !$input->getOption('api-resource')
@@ -195,9 +199,12 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
             return;
         }
 
+
+        $modulesName = $input->getArgument("module");
+
         $entityClassDetails = $generator->createClassNameDetails(
             $input->getArgument('name'),
-            'Entity\\'
+            "Modules\\{$modulesName}\\Entity\\"
         );
 
         $classExists = class_exists($entityClassDetails->getFullName());
@@ -208,6 +215,9 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
                 apiResource: $input->getOption('api-resource'),
                 broadcast: $broadcast,
                 useUuidIdentifier: $this->getIdType(),
+                withPasswordUpgrade: false,
+                generateRepositoryClass: true,
+                modulesName: $modulesName
             );
 
             if ($broadcast) {

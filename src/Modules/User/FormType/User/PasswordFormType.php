@@ -16,7 +16,7 @@ class PasswordFormType extends AbstractType
     {
 
         $resolver->setDefault("constraints",[
-            new PasswordStrength(),
+//            new PasswordStrength(),
         ]);
 
 //        $help = "The password must be at least 8 characters long, consist of a number, an uppercase and a lowercase letter";

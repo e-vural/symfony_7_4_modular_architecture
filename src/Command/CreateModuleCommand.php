@@ -31,6 +31,7 @@ class CreateModuleCommand extends Command
     private const FORM_SUBDIR = 'Form';
     private const INFRASTRUCTURE_SUBDIR = 'Infrastructure';
     private const ATTRIBUTE_SUBDIR = 'Attribute';
+    private const SHARED = 'Shared';
 
     public function __construct()
     {
@@ -48,6 +49,7 @@ class CreateModuleCommand extends Command
         // Modül adını sor
         $question = new Question('Modül adını girin (örn: Siparis, Urun, Musteri): ');
         $moduleName = $questionHelper->ask($input, $output, $question);
+
 
         if (empty($moduleName)) {
             $io->error('Modül adı boş olamaz!');
@@ -73,7 +75,8 @@ class CreateModuleCommand extends Command
                 self::SERVICE_SUBDIR,
                 self::FORM_SUBDIR,
                 self::INFRASTRUCTURE_SUBDIR,
-                self::ATTRIBUTE_SUBDIR
+                self::ATTRIBUTE_SUBDIR,
+                self::SHARED,
             ];
 
             foreach ($subDirectories as $dir) {
@@ -111,6 +114,7 @@ class CreateModuleCommand extends Command
                 "- {$modulePath}/" . self::FORM_SUBDIR . "/",
                 "- {$modulePath}/" . self::INFRASTRUCTURE_SUBDIR . "/",
                 "- {$modulePath}/" . self::ATTRIBUTE_SUBDIR . "/",
+                "- {$modulePath}/" . self::SHARED . "/",
                 "",
                 "Oluşturulan dosyalar:",
                 "- {$modulePath}/" . self::ATTRIBUTE_SUBDIR . "/{$moduleName}RoutePrefix.php",

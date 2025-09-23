@@ -20,7 +20,7 @@ nelmio_api_doc:
     documentation:
         info:
             title: KNO API
-            description: This is an awesome app!
+            description: Kenan Özsoy Tekstil
             version: 1.0.0
         components:
             securitySchemes:

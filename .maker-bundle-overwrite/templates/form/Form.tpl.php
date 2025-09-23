@@ -3,9 +3,9 @@
 namespace <?= $namespace ?>;
 
 <?= $use_statements; ?>
-use App\Form\MyAbstractForm;
+use App\Shared\Form\BaseAbstractForm;
 
-class <?= $class_name ?> extends MyAbstractForm
+class <?= $class_name ?> extends BaseAbstractForm
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

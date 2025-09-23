@@ -8,9 +8,9 @@ use Symfony\Bundle\MakerBundle\Maker\Common\EntityIdTypeEnum;
 namespace <?= $namespace ?>;
 
 <?= $use_statements; ?>
-use App\Entity\_Traits\Date\DatetimeTrait;
-use App\Entity\_Traits\Date\DeleteAtTrait;
-use App\Entity\_Traits\PrimaryKey\PrimaryKeyTrait;
+use App\Shared\Traits\Entity\Date\DatetimeTrait;
+use App\Shared\Traits\Entity\Date\DeleteAtTrait;
+use App\Shared\Traits\Entity\PrimaryKey\PrimaryKeyTrait;
 
 #[ORM\Entity(repositoryClass: <?= $repository_class_name ?>::class)]
 <?php if ($should_escape_table_name): ?>#[ORM\Table(name: '`<?= $table_name ?>`')]

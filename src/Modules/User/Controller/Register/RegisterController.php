@@ -61,6 +61,8 @@ class RegisterController extends AbstractController
     public function register(Request $request, EntityManagerInterface $entityManager, FormFactoryInterface $formFactory): JsonResponse
     {
 
+
+
 //        try {
 
 
@@ -68,6 +70,8 @@ class RegisterController extends AbstractController
 
 
         $form = $formFactory->create(RegisterForm::class);
+
+//        dump($form);exit();
 
         $form->submit($payload);
 

@@ -186,10 +186,10 @@ class Generator
     public function createClassNameDetails(string $name, string $namespacePrefix, string $suffix = '', string $validationErrorMessage = ''): ClassNameDetails
     {
 
-        dd("createClassNameDetails");
-//        $fullNamespacePrefix = $this->namespacePrefix.'\\'.$namespacePrefix;//ORiginal
-        dd($name,$namespacePrefix,$this->namespacePrefix);
-        $fullNamespacePrefix = $name;//TODO Modül bazlı içni burayı geliştir. henüz tam olmadı
+//        dd("createClassNameDetails");
+        $fullNamespacePrefix = $this->namespacePrefix.'\\'.$namespacePrefix;//ORiginal
+//        dd($name,$namespacePrefix,$this->namespacePrefix);
+//        $fullNamespacePrefix = $name;//TODO Modül bazlı içni burayı geliştir. henüz tam olmadı
         if ('\\' === $name[0]) {
             // class is already "absolute" - leave it alone (but strip opening \)
             $className = substr($name, 1);
@@ -258,7 +258,7 @@ class Generator
     {
 
 
-        dd("generateController");
+//        dd("generateController");
 
         return $this->generateClass(
             $controllerClassName,
@@ -278,7 +278,7 @@ class Generator
     public function generateTemplate(string $targetPath, string $templateName, array $variables = [])
     {
 
-        dd("generateTemplate");
+//        dd("generateTemplate");
 
         $this->generateFile(
             $this->fileManager->getPathForTemplate($targetPath),

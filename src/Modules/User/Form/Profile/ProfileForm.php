@@ -3,6 +3,7 @@
 namespace App\Modules\User\Form\Profile;
 
 use App\Modules\User\Entity\Profile\Profile;
+use App\Modules\User\Form\UserForm;
 use App\Shared\Form\BaseAbstractForm;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,6 +24,9 @@ class ProfileForm extends BaseAbstractForm
                 "attr" => ["enterkeyhint" => "next","tabindex" =>1],
                 "required" => $options["surname_required"]
             ])
+//            ->add('user', UserForm::class,[
+//                "required" => false,
+//            ])
         ;
 
         if  (!$options["without_phone"]){
